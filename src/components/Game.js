@@ -2,20 +2,24 @@ import React, { PureComponent } from 'react';
 
 class Game extends PureComponent {
   target = 10 + Math.floor(50 * Math.random());
-  playNumbers = [1, 4, 5, 2, 6];
+  playNumbers = [1, 4, 5, 2, 6, 10];
   render() {
     return (
       <div>
         <div style={styles.target}>{this.target}</div>
         <div>
-          <div style={styles.playNumber} className="play-number">6</div>
-          <div style={styles.playNumber} className="play-number">8</div>
-          <div style={styles.playNumber} className="play-number">40</div>
-          <div style={styles.playNumber} className="play-number">33</div>
-          <div style={styles.playNumber} className="play-number">66</div>
-          <div style={styles.playNumber} className="play-number">3</div>
+          {this.playNumbers.map((num, i) =>
+            <div
+              key={i}
+              style={styles.playNumber} className="play-number">
+              {num}
+            </div>
+          )}
+
+
         </div>
       </div>
+
     );
   }
 }
