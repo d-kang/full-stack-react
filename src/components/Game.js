@@ -1,11 +1,14 @@
 import React, { PureComponent } from 'react';
 
 class Game extends PureComponent {
-  target = 10 + Math.floor(50 * Math.random());
+  // target = 10 + Math.floor(50 * Math.random());
   // playNumbers = [1, 4, 5, 2, 6, 10];
   playNumbers = Array.from({ length: 6 }).map(() =>
     2 + Math.floor(12 * Math.random())
   );
+  target = this.playNumbers.slice(0, 3).reduce((acc, curr) => acc + curr, 0);
+
+  // TODO: SHUFFLE playNumbers
   render() {
     return (
       <div>
