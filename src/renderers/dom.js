@@ -1,7 +1,9 @@
+console.log('hi from dom.js')
 const React = require('react');
 const ReactDOM = require('react-dom');
 
+
 ReactDOM.render(
-  React.createElement('h2', null, 'Hello React'),
-  document.getElementById('root');
-)
+  <h2> Hello From React</h2>,
+  document.getElementById('root'),
+);
