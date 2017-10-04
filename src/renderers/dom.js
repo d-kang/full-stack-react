@@ -1,9 +1,9 @@
-console.log('hi from dom.js')
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
+import App from '../components/App'
 
 ReactDOM.render(
-  <h2> Hello From React</h2>,
+  <App />,
   document.getElementById('root'),
 );
