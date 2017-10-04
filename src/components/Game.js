@@ -1,10 +1,8 @@
 import React, { PureComponent } from 'react';
 
 class Game extends PureComponent {
-  constructor() {
-    super();
-    this.target = 10 + Math.floor(50 * Math.random());
-  }
+  target = 10 + Math.floor(50 * Math.random());
+  playNumbers = [1, 4, 5, 2, 6];
   render() {
     return (
       <div>
