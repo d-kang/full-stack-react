@@ -1,22 +1,22 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import Game from './Game';
-// import Quiz from './Quiz';
 
-class App extends PureComponent {
+class App extends React.PureComponent {
+  state = {
+    gameId: 1
+  };
+
+  resetGame = () => {
+    this.setState((prevState) => {
+      return { gameId: prevState.gameId + 1 };
+    });
+  };
+
   render() {
     return (
-      <div>
-        {/* {
-          data.map((singleQuestion, i) =>
-            <Quiz singleQuestion={singleQuestion} key={i} />
-          )
-        } */}
-
-        <Game />
-      </div>
+      <Game reset={this.resetGame} key={this.state.gameId} />
     );
   }
-
 }
 
 export default App;
