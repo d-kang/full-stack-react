@@ -33,10 +33,8 @@ class Game extends PureComponent {
     } else if (selectedSum < this.target) {
       return 'PLAYING';
     } else if (selectedSum === this.target) {
-      clearInterval(this.intervalId);
       return 'WON';
     } else if (selectedSum === this.target) {
-      clearInterval(this.intervalId);
       return 'LOST';
     }
 
@@ -57,6 +55,12 @@ class Game extends PureComponent {
   target = this.playNumbers.slice(0, 3).reduce((acc, curr) => acc + curr, 0);
 
   // TODO: SHUFFLE playNumbers
+
+  componentWillUpdate(nextProps, nextState) {
+    if (this.gameStatus() !== 'PLAYING') {
+      clearInterval(this.intervalId);
+    }
+  }
   render() {
     const gameStatus = this.gameStatus();
     return (
