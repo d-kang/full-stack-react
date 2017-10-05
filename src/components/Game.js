@@ -1,9 +1,47 @@
 import React, { PureComponent } from 'react';
 import PlayNumber from './PlayNumber';
 class Game extends PureComponent {
+  // after 10 seconds, game over
   state = {
     selectedIds: [],
+    remainingSeconds: 10,
   }
+
+  componentDidMount() {
+    this.intervalId = setInterval(() => {
+      this.setState((prevState) => {
+        if (prevState.remainingSeconds === 0) {
+          clearInterval(intervalId);
+          return null;
+        }
+        return { remainingSeconds: prevState.remainingSeconds - 1 };
+      });
+    }, 1000);
+  }
+
+  // gameStatus = 'PLAYING'
+
+  // gameState: PLAYING, WON, LOST
+
+  gameStatus = () => {
+    const selectedSum = this.state.selectedIds.reduce(
+      (acc, curr) => acc + this.playNumbers[curr],
+      0
+    );
+    if (this.state.remainingSeconds === 0) {
+      return 'LOST';
+    } else if (selectedSum < this.target) {
+      return 'PLAYING';
+    } else if (selectedSum === this.target) {
+      clearInterval(this.intervalId);
+      return 'WON';
+    } else if (selectedSum === this.target) {
+      clearInterval(this.intervalId);
+      return 'LOST';
+    }
+
+  }
+
 
   selectId = (id) => {
     this.setState((prevState) => {
@@ -20,6 +58,7 @@ class Game extends PureComponent {
 
   // TODO: SHUFFLE playNumbers
   render() {
+    const gameStatus = this.gameStatus();
     return (
       <div>
         <div style={styles.target}>{this.target}</div>
@@ -30,12 +69,14 @@ class Game extends PureComponent {
               id={i}
               number={num}
               onClick={this.selectId}
-              isDisabled={this.state.selectedIds.indexOf(i) >= 0}
+              isDisabled={
+                gameStatus !== 'PLAYING' || this.state.selectedIds.indexOf(i) >= 0}
             />
           )}
         </div>
+        {this.state.remainingSeconds} <br/>
+        {gameStatus}
       </div>
-
     );
   }
 }
