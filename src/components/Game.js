@@ -1,6 +1,16 @@
 import React, { PureComponent } from 'react';
-import PlayNumber from './PlayNumber'
+import PlayNumber from './PlayNumber';
 class Game extends PureComponent {
+  state = {
+    selectedIds: [],
+  }
+
+  selectId = (id) => {
+    this.setState((prevState) => {
+      return { selectedIds: [...prevState.selectedIds, id] };
+    });
+  }
+
   // target = 10 + Math.floor(50 * Math.random());
   // playNumbers = [1, 4, 5, 2, 6, 10];
   playNumbers = Array.from({ length: 6 }).map(() =>
@@ -19,6 +29,8 @@ class Game extends PureComponent {
               key={i}
               id={i}
               number={num}
+              onClick={this.selectId}
+              isDisabled={this.state.selectedIds.indexOf(i) >= 0}
             />
           )}
         </div>
