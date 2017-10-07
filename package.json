@@ -1,12 +1,14 @@
 {
-  "name": "fullstack-react",
+  "name": "Game-City",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server/server.js & npm run webpack",
+    "start": "node src/server/server.js & npm run prod",
     "yarnwebpack": "yarn webpack src/renderers/dom.js public/bundle.js",
+    "dev": "nodemon src/server/server.js & yarn webpack",
+    "prod": "webpack",
     "webpack": "webpack -wd"
   },
   "repository": {
