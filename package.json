@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server/server.js",
+    "start": "node src/server/server.js & npm run webpack",
     "yarnwebpack": "yarn webpack src/renderers/dom.js public/bundle.js",
     "webpack": "webpack -wd"
   },
