@@ -111,4 +111,4 @@ const mapStateToProps = (state) => ({
   ...state.game,
 })
 
-export defualt connect(mapStateToProps, { selectId })(Game);
+export default connect(mapStateToProps, { selectId })(Game);
