@@ -1,4 +1,6 @@
-export default (state, action) => {
+import { combineReducers } from 'redux';
+
+const global = (state = {}, action) => {
   switch (action.type) {
     case 'RESET_GAME':
       return {
@@ -9,3 +11,17 @@ export default (state, action) => {
       return state;
   }
 };
+
+const game = (state = {}, action) => {
+  switch (action.type) {
+    case 'SELECT_ID':
+      return {
+        ...state,
+        selectedIds: [...state.selectedIds, action.id]
+      };
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({ global, game });
