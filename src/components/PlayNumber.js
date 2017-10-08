@@ -8,6 +8,7 @@ class PlayNumber extends PureComponent {
     }
     this.props.onClick(this.props.id);
   }
+
   render() {
     return (
       <div
@@ -19,7 +20,6 @@ class PlayNumber extends PureComponent {
       </div>
     );
   }
-
 }
 
 const styles = (isDisabled) => ({
@@ -30,7 +30,7 @@ const styles = (isDisabled) => ({
   backgroundColor: '#b8ceb8',
   textAlign: 'center',
   padding: '0.25rem',
-  opacity: isDisabled ? 0.3 : 1
+  opacity: isDisabled ? 0.3 : 1,
 });
 
 

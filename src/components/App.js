@@ -11,7 +11,7 @@ const App = (props) =>
   />;
 
 const mapStateToProps = (state) => ({
-  gameId: state.gameId,
+  gameId: state.global.gameId,
 });
 
 export default connect(mapStateToProps, { resetGame })(App);
