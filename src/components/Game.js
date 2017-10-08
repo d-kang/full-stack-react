@@ -7,9 +7,8 @@ import { selectId } from '../store/actions';
 
 class Game extends React.PureComponent {
   state = {
-    remainingSeconds: 10,
-  };
-
+    remainingSeconds: 20,
+  }
   gameStatus = 'PLAYING';
 
   componentDidMount() {
@@ -42,11 +41,11 @@ class Game extends React.PureComponent {
     if (selectedSum === this.target) {
       return 'WON';
     }
-
-    playNumbers = Array.from({ length: 6 }).map(
-      ()=> 2 + Math.floor(12 * Math.random())
-    );
   };
+
+  playNumbers = Array.from({ length: 6 }).map(
+    () => 2 + Math.floor(12 * Math.random())
+  );
 
   target = this.playNumbers.slice(0, 4).reduce((acc, curr) => acc + curr, 0);
 
@@ -55,7 +54,7 @@ class Game extends React.PureComponent {
   componentWillUpdate(nextProps, nextState) {
     if (
       nextProps.selectedIds !== this.props.selectedIds ||
-      nextState.remaningSecods === 0
+      nextState.remainingSeconds === 0
     ) {
       this.gameStatus = this.calcGameStatus(nextProps, nextState);
     }
@@ -80,7 +79,7 @@ class Game extends React.PureComponent {
                 onClick={this.props.selectId}
                 isDisabled={
                   gameStatus !== 'PLAYING' ||
-                  this.state.selectedIds.indexOf(index) >= 0
+                  this.props.selectedIds.indexOf(index) >= 0
                 }
               />
             ))}
@@ -107,8 +106,9 @@ const styles = {
   },
 };
 
+
 const mapStateToProps = (state) => ({
-  ...state.game,
-})
+  ...state.game
+});
 
 export default connect(mapStateToProps, { selectId })(Game);
