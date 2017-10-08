@@ -5,7 +5,10 @@ import Game from './Game';
 import { resetGame } from '../store/actions';
 
 const App = (props) =>
-  <Game reset={props.resetGame} key={props.gameId} />;
+  <Game
+    reset={props.resetGame}
+    key={props.gameId}
+  />;
 
 const mapStateToProps = (state) => ({
   gameId: state.gameId,

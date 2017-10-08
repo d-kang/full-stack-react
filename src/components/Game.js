@@ -1,11 +1,12 @@
 import React from 'react';
 import shuffle from 'lodash.shuffle';
+import { connect } from 'react-redux';
 
 import PlayNumber from './PlayNumber';
+import { selectId } from '../store/actions';
 
 class Game extends React.PureComponent {
   state = {
-    selectedIds: [],
     remainingSeconds: 10,
   };
 
@@ -23,8 +24,12 @@ class Game extends React.PureComponent {
     }, 1000);
   }
 
-  calcGameStatus = (nextState) => {
-    const selectedSum = nextState.selectedIds.reduce(
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
+
+  calcGameStatus = (nextProps, nextState) => {
+    const selectedSum = nextProps.selectedIds.reduce(
       (acc, curr) => acc + this.playNumbers[curr],
       0
     );
@@ -37,17 +42,11 @@ class Game extends React.PureComponent {
     if (selectedSum === this.target) {
       return 'WON';
     }
-  };
 
-  selectId = (id) => {
-    this.setState((prevState) => {
-      return { selectedIds: [...prevState.selectedIds, id] };
-    });
+    playNumbers = Array.from({ length: 6 }).map(
+      ()=> 2 + Math.floor(12 * Math.random())
+    );
   };
-
-  playNumbers = Array.from({ length: 6 }).map(
-    () => 2 + Math.floor(12 * Math.random())
-  );
 
   target = this.playNumbers.slice(0, 4).reduce((acc, curr) => acc + curr, 0);
 
@@ -55,10 +54,10 @@ class Game extends React.PureComponent {
 
   componentWillUpdate(nextProps, nextState) {
     if (
-      nextState.selectedIds !== this.state.selectedIds ||
-      nextState.remainingSeconds === 0
+      nextProps.selectedIds !== this.props.selectedIds ||
+      nextState.remaningSecods === 0
     ) {
-      this.gameStatus = this.calcGameStatus(nextState);
+      this.gameStatus = this.calcGameStatus(nextProps, nextState);
     }
 
     if (this.gameStatus !== 'PLAYING') {
@@ -78,7 +77,7 @@ class Game extends React.PureComponent {
                 key={index}
                 number={playNumber}
                 id={index}
-                onClick={this.selectId}
+                onClick={this.props.selectId}
                 isDisabled={
                   gameStatus !== 'PLAYING' ||
                   this.state.selectedIds.indexOf(index) >= 0
@@ -108,4 +107,8 @@ const styles = {
   },
 };
 
-export default Game;
+const mapStateToProps = (state) => ({
+  ...state.game,
+})
+
+export defualt connect(mapStateToProps, { selectId })(Game);
