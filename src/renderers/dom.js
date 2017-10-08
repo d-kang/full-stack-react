@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
+import './server';
 import App from '../components/App';
-import store from '../store/store';
+import storeConfig from '../store/store';
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={storeConfig()}>
     <App />
   </Provider>,
   document.getElementById('root'),
