@@ -2,4 +2,4 @@
 
 React-redux application with various games
 
-https://game-city.herokuapp.com/
+[Link to Game-City on Heroku title](https://game-city.herokuapp.com/ "Game-City")
