@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server/server.js & npm run prod",
+    "start": "node src/server/server.js & webpack -wd",
     "yarnwebpack": "yarn webpack src/renderers/dom.js public/bundle.js",
-    "dev": "nodemon src/server/server.js & yarn webpack",
-    "prod": "webpack",
+    "dev": "nodemon src/server/server.js & webpack -wd",
     "webpack": "webpack -wd"
   },
   "repository": {
